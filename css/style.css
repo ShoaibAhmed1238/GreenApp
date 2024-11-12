@@ -1,0 +1,233 @@
+/* Reset styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #90ee91;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Central app container */
+.app-container {
+    width: 100%;
+    max-width: 500px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    background-color: #90ee91;
+    padding-bottom: 20px; /* Extra padding at the bottom */
+}
+
+header {
+    background-color: #333;
+    color: #90ee91;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2em;
+    margin-bottom: 5px;
+}
+
+section {
+    flex: 1;
+    background: #90ee91;
+    margin: 15px; /* Increased margin for more spacing */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#home-screen input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1em;
+}
+
+.product-header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.product-image-placeholder {
+    width: 80px;
+    height: 80px;
+    background-color: #ccc;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+    font-weight: bold;
+    margin-right: 15px;
+    font-size: 0.9em;
+}
+
+.product-header h2 {
+    font-size: 1.8em;
+    color: #333;
+    margin: 0;
+    flex: 1;
+}
+
+.product-header p {
+    color: #555;
+    margin: 5px 0;
+    font-size: 1em;
+}
+
+.product-details {
+    width: 100%;
+    text-align: left;
+    color: #333;
+}
+
+.product-details h3 {
+    font-size: 1.2em;
+    margin-top: 15px;
+    color: #333;
+}
+
+.product-details p {
+    font-size: 0.95em;
+    line-height: 1.5;
+    color: #555;
+}
+
+/* Button Styling */
+button {
+    background-color: #333;
+    color: white;
+    padding: 12px;
+    width: 80%;
+    max-width: 300px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+    margin: 10px 0;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+/* Checkmark for feedback confirmation */
+.checkmark {
+    font-size: 1.5em;
+    color: green;
+    margin-top: 10px;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.checkmark.show {
+    opacity: 1;
+}
+
+/* Comparison Screen Styling */
+.comparison-box {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
+}
+
+.product {
+    background-color: #e0ffe0;
+    padding: 20px; /* Increased padding for better spacing */
+    border-radius: 10px;
+    flex: 1;
+    text-align: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.product h3 {
+    font-size: 1.3em;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.product p {
+    color: #555;
+    font-size: 0.9em;
+    margin: 5px 0;
+}
+
+/* Product Images in Comparison Screen */
+.comparison-box .product img {
+    width: 80px;
+    height: 80px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+/* Best Choice Label */
+.best-choice-label {
+    background-color: #ffdd57; /* Gold color for emphasis */
+    color: #333;
+    padding: 4px 8px;
+    border-radius: 5px;
+    font-size: 0.9em;
+    margin-left: 10px;
+}
+
+/* User Settings Screen Styling */
+label {
+    font-size: 1em;
+    color: #333;
+    margin-top: 10px;
+    display: block;
+}
+
+input[type="range"] {
+    width: 80%;
+    margin: 10px 0;
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: #ddd;
+    height: 5px;
+    border-radius: 5px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background-color: #333;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background-color: #333;
+    border-radius: 50%;
+    cursor: pointer;
+}

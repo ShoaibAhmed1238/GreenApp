@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenApp</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header>
+            <h1>GreenApp</h1>
+            <p>Helping users make environmentally conscious shopping choices</p>
+        </header>
+
+        <!-- Welcome Screen -->
+        <section id="welcome-screen">
+            <h2>Welcome to GreenApp</h2>
+            <p>Helping users make environmentally conscious shopping choices.</p>
+            <button onclick="showScreen('home-screen')">Get Started</button>
+            <button onclick="showScreen('tutorial-screen')">Tutorial</button>
+        </section>
+
+        <!-- Home Screen -->
+        <section id="home-screen" style="display: none;">
+            <h2>Search for Products</h2>
+            <input type="text" placeholder="Enter UPC code">
+            <button onclick="searchProduct()">Go</button>
+            <p>Or</p>
+            <button onclick="scanBarcode()">Click to open camera</button>
+        </section>
+
+        <!-- Tutorial Screen -->
+        <section id="tutorial-screen" style="display: none;">
+            <h2>Need Help?</h2>
+            <p>Video showing how to use GreenApp</p>
+            <p>More questions? Reach out to us: Support@GreenApp.com</p>
+            <button onclick="showScreen('welcome-screen')">Back</button>
+        </section>
+
+        <!-- Product Detail Screen Template -->
+        <section id="product-detail-template" style="display: none;">
+            <div class="product-header">
+                <!-- Product Image Placeholder with Image Tag -->
+                <div class="product-image-placeholder">
+                    <img id="product-image" src="" alt="Product Image" style="width: 80px; height: 80px; border-radius: 5px;">
+                </div>
+                <div>
+                    <h2 id="product-name">Product Name</h2>
+                    <p id="product-type">Type: Product Type</p>
+                </div>
+            </div>
+            <div class="product-details">
+                <h3>Practices:</h3>
+                <p id="product-practices">Product practices description...</p>
+                <h3>Environment:</h3>
+                <p id="product-environment">Environmental impact description...</p>
+            </div>
+            <!-- Add to Favorites Button with Checkmark Confirmation -->
+            <button id="add-to-favorites-btn" onclick="addToFavorites()">Add to Favorites</button>
+            <div id="favorite-checkmark" class="checkmark" style="display: none;">✔ Added to Favorites</div>
+            <button onclick="showScreen('comparison-screen')">Click To Compare</button>
+            <button onclick="showScreen('home-screen')">Back</button>
+        </section>
+
+        <!-- Comparison Screen -->
+        <section id="comparison-screen" style="display: none;">
+            <h2>Comparison</h2>
+            <div class="comparison-box">
+                <!-- Simple Green Product Section -->
+                <div class="product" id="product-simple-green">
+                    <h3>Simple Green</h3>
+                    <img id="simple-green-image" src="" alt="Simple Green Image" style="width: 80px; height: 80px; border-radius: 5px;">
+                    <p><strong>Pros:</strong> Environmental focus, Innovative and safe ingredients</p>
+                    <p><strong>Cons:</strong> Packaging not compostable</p>
+                </div>
+                <!-- Seventh Generation Product Section with Best Choice Label -->
+                <div class="product best-choice" id="product-seventh-generation">
+                    <h3>Seventh Generation <span class="best-choice-label">Best Choice</span></h3>
+                    <img id="seventh-generation-image" src="" alt="Seventh Generation Image" style="width: 80px; height: 80px; border-radius: 5px;">
+                    <p><strong>Pros:</strong> Transparency and regulatory compliance, Commitment to sustainability</p>
+                    <p><strong>Cons:</strong> Product price</p>
+                </div>
+            </div>
+            <button onclick="showScreen('home-screen')">Back</button>
+        </section>
+
+        <!-- User Settings/Profile Screen -->
+        <section id="user-settings-screen" style="display: none;">
+            <h2>User Settings</h2>
+            <p>Adjust your preferences for product impact criteria:</p>
+            <label>Carbon Footprint Importance</label>
+            <input type="range" min="1" max="5" value="3">
+            <label>Materials Importance</label>
+            <input type="range" min="1" max="5" value="3">
+            <label>Company Practices</label>
+            <input type="range" min="1" max="5" value="3">
+            <button onclick="showScreen('home-screen')">Back</button>
+        </section>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

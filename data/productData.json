@@ -1,0 +1,26 @@
+{
+    "products": [
+        {
+            "id": "simple_green",
+            "upc": "043318130335",
+            "name": "Simple Green",
+            "type": "Multi-purpose cleaner",
+            "practices": "Committed to environmental protection and safety. Includes EPA Safer Choice certification.",
+            "environment": "Prioritizes environmental and human safety with non-toxic, biodegradable formula. Packaging is recyclable.",
+            "pros": ["Environmental focus", "Innovative and safe ingredients"],
+            "cons": ["Packaging not compostable"],
+            "image": "images/simple_green.png"
+        },
+        {
+            "id": "seventh_generation",
+            "upc": "732913451630",
+            "name": "Seventh Generation",
+            "type": "Multi-purpose cleaner",
+            "practices": "Committed to a sustainable, equitable future with climate-friendly initiatives and EPA Safer Choice certification.",
+            "environment": "Promotes transparency and uses plant-based ingredients. Packaging is 100% recycled plastic.",
+            "pros": ["Transparency and regulatory compliance", "Commitment to sustainability"],
+            "cons": ["Product price"],
+            "image": "images/seventh_generation.png"
+        }
+    ]
+}
