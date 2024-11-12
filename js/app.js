@@ -130,9 +130,65 @@ function addToFavorites() {
     }, 2000);
 }
 
-// Placeholder function for barcode scanning
+// Function to scan barcode with camera permission
+let videoStream = null;
+
 function scanBarcode() {
-    alert("Camera functionality to be implemented.");
+    navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
+        .then((stream) => {
+            const videoElement = document.getElementById("video");
+            videoElement.srcObject = stream;
+            videoStream = stream;
+
+            videoElement.play();
+            showScreen("barcode-scan-screen");
+            startBarcodeScan(videoElement);
+        })
+        .catch((error) => {
+            console.error("Error accessing the camera:", error);
+            alert("Unable to access the camera. Please allow camera permissions.");
+        });
+}
+
+function startBarcodeScan(videoElement) {
+    const canvasElement = document.createElement("canvas");
+    const canvasContext = canvasElement.getContext("2d");
+
+    function scanFrame() {
+        if (videoElement.readyState === videoElement.HAVE_ENOUGH_DATA) {
+            canvasElement.width = videoElement.videoWidth;
+            canvasElement.height = videoElement.videoHeight;
+            canvasContext.drawImage(videoElement, 0, 0, canvasElement.width, canvasElement.height);
+            
+            const imageData = canvasContext.getImageData(0, 0, canvasElement.width, canvasElement.height);
+            const code = jsQR(imageData.data, imageData.width, imageData.height);
+
+            if (code) {
+                alert(`Barcode detected: ${code.data}`);
+                stopBarcodeScan();
+                searchProductByUPC(code.data);
+            }
+        }
+        requestAnimationFrame(scanFrame);
+    }
+
+    requestAnimationFrame(scanFrame);
+}
+
+function stopBarcodeScan() {
+    if (videoStream) {
+        videoStream.getTracks().forEach(track => track.stop());
+    }
+    showScreen("home-screen");
+}
+
+function searchProductByUPC(upc) {
+    const product = productsData.find(p => p.upc === upc.trim());
+    if (product) {
+        showProductDetail(product.id);
+    } else {
+        alert("Product not found. Please enter a valid UPC code.");
+    }
 }
 
 // Show the welcome screen on page load

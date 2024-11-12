@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GreenApp</title>
     <link rel="stylesheet" href="css/style.css">
+    <!-- Include Teko font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Titan+One&display=swap" rel="stylesheet">
+    <!-- Include jsQR library for barcode scanning -->
+    <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
 </head>
 <body>
     <div class="app-container">
@@ -18,6 +24,7 @@
         <section id="welcome-screen">
             <h2>Welcome to GreenApp</h2>
             <p>Helping users make environmentally conscious shopping choices.</p>
+            <img src="images/earth.png" alt="Earth" class="welcome-image">
             <button onclick="showScreen('home-screen')">Get Started</button>
             <button onclick="showScreen('tutorial-screen')">Tutorial</button>
         </section>
@@ -25,6 +32,8 @@
         <!-- Home Screen -->
         <section id="home-screen" style="display: none;">
             <h2>Search for Products</h2>
+            <p>Helping users make environmentally conscious shopping choices.</p>
+            <img src="images/clean.png" alt="Clean Environment" class="home-image">
             <input type="text" placeholder="Enter UPC code">
             <button onclick="searchProduct()">Go</button>
             <p>Or</p>
@@ -42,7 +51,6 @@
         <!-- Product Detail Screen Template -->
         <section id="product-detail-template" style="display: none;">
             <div class="product-header">
-                <!-- Product Image Placeholder with Image Tag -->
                 <div class="product-image-placeholder">
                     <img id="product-image" src="" alt="Product Image" style="width: 80px; height: 80px; border-radius: 5px;">
                 </div>
@@ -57,7 +65,6 @@
                 <h3>Environment:</h3>
                 <p id="product-environment">Environmental impact description...</p>
             </div>
-            <!-- Add to Favorites Button with Checkmark Confirmation -->
             <button id="add-to-favorites-btn" onclick="addToFavorites()">Add to Favorites</button>
             <div id="favorite-checkmark" class="checkmark" style="display: none;">✔ Added to Favorites</div>
             <button onclick="showScreen('comparison-screen')">Click To Compare</button>
@@ -68,14 +75,12 @@
         <section id="comparison-screen" style="display: none;">
             <h2>Comparison</h2>
             <div class="comparison-box">
-                <!-- Simple Green Product Section -->
                 <div class="product" id="product-simple-green">
                     <h3>Simple Green</h3>
                     <img id="simple-green-image" src="" alt="Simple Green Image" style="width: 80px; height: 80px; border-radius: 5px;">
                     <p><strong>Pros:</strong> Environmental focus, Innovative and safe ingredients</p>
                     <p><strong>Cons:</strong> Packaging not compostable</p>
                 </div>
-                <!-- Seventh Generation Product Section with Best Choice Label -->
                 <div class="product best-choice" id="product-seventh-generation">
                     <h3>Seventh Generation <span class="best-choice-label">Best Choice</span></h3>
                     <img id="seventh-generation-image" src="" alt="Seventh Generation Image" style="width: 80px; height: 80px; border-radius: 5px;">
@@ -84,6 +89,13 @@
                 </div>
             </div>
             <button onclick="showScreen('home-screen')">Back</button>
+        </section>
+
+        <!-- Barcode Scan Screen -->
+        <section id="barcode-scan-screen" style="display: none;">
+            <h2>Scan a Product Barcode</h2>
+            <video id="video" style="width: 100%; max-width: 400px;" autoplay></video>
+            <button onclick="stopBarcodeScan()">Stop Scanning</button>
         </section>
 
         <!-- User Settings/Profile Screen -->
@@ -100,6 +112,7 @@
         </section>
     </div>
 
+    <!-- Main App Script -->
     <script src="js/app.js"></script>
 </body>
 </html>
