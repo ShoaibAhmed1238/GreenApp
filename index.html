@@ -5,11 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GreenApp</title>
     <link rel="stylesheet" href="css/style.css">
-    <!-- Include Teko font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Titan+One&display=swap" rel="stylesheet">
-    <!-- Include jsQR library for barcode scanning -->
     <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
 </head>
 <body>
@@ -50,6 +48,7 @@
 
         <!-- Product Detail Screen Template -->
         <section id="product-detail-template" style="display: none;">
+            <button class="info-button" onclick="showScreen('sustainability-info')">?</button>
             <div class="product-header">
                 <div class="product-image-placeholder">
                     <img id="product-image" src="" alt="Product Image" style="width: 80px; height: 80px; border-radius: 5px;">
@@ -59,16 +58,32 @@
                     <p id="product-type">Type: Product Type</p>
                 </div>
             </div>
+            
             <div class="product-details">
-                <h3>Practices:</h3>
-                <p id="product-practices">Product practices description...</p>
-                <h3>Environment:</h3>
-                <p id="product-environment">Environmental impact description...</p>
+                <h3>Practices: <span class="info-icon" onclick="showTooltip('practices')"></span></h3>
+                <p id="product-practices">Committed to a sustainable, equitable future with climate-friendly initiatives and EPA Safer Choice certification.</p>
+                
+                <h3>Environment: <span class="info-icon" onclick="showTooltip('environment')"></span></h3>
+                <p id="product-environment">Promotes transparency and uses plant-based ingredients. Packaging is 100% recycled plastic.</p>
             </div>
+            
+            <div id="tooltip" class="tooltip" style="display: none;"></div>
+            
             <button id="add-to-favorites-btn" onclick="addToFavorites()">Add to Favorites</button>
             <div id="favorite-checkmark" class="checkmark" style="display: none;">✔ Added to Favorites</div>
             <button onclick="showScreen('comparison-screen')">Click To Compare</button>
             <button onclick="showScreen('home-screen')">Back</button>
+        </section>
+
+        <!-- Sustainability Info Screen -->
+        <section id="sustainability-info" style="display: none;">
+            <h2>Sustainability Information</h2>
+            <br>
+            <p><strong>Sustainability Score:</strong> 114.5</p>
+            <br>
+            <p><strong>Data Source:</strong> <a href="https://www.seventhgeneration.com/blog/corporate-consciousness-2022" target="_blank">Seventh Generation Blog</a></p>
+            <br>
+            <button onclick="goBack()">Back</button>
         </section>
 
         <!-- Comparison Screen -->
@@ -77,13 +92,14 @@
             <div class="comparison-box">
                 <div class="product" id="product-simple-green">
                     <h3>Simple Green</h3>
-                    <img id="simple-green-image" src="" alt="Simple Green Image" style="width: 80px; height: 80px; border-radius: 5px;">
+                    <img id="simple-green-image" src="images/simple_green.png" alt="Simple Green All-Purpose Cleaner">
                     <p><strong>Pros:</strong> Environmental focus, Innovative and safe ingredients</p>
                     <p><strong>Cons:</strong> Packaging not compostable</p>
+                    <span class="best-choice-label">Best Choice</span>
                 </div>
-                <div class="product best-choice" id="product-seventh-generation">
-                    <h3>Seventh Generation <span class="best-choice-label">Best Choice</span></h3>
-                    <img id="seventh-generation-image" src="" alt="Seventh Generation Image" style="width: 80px; height: 80px; border-radius: 5px;">
+                <div class="product" id="product-seventh-generation">
+                    <h3>Seventh Generation</h3>
+                    <img id="seventh-generation-image" src="images/seventh_generation.png" alt="Seventh Generation Image">
                     <p><strong>Pros:</strong> Transparency and regulatory compliance, Commitment to sustainability</p>
                     <p><strong>Cons:</strong> Product price</p>
                 </div>
@@ -112,7 +128,6 @@
         </section>
     </div>
 
-    <!-- Main App Script -->
     <script src="js/app.js"></script>
 </body>
 </html>
