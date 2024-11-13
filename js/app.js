@@ -1,20 +1,3 @@
-// Function to show a specific screen by ID and hide all others
-function showScreen(screenId) {
-    const sections = document.querySelectorAll("section");
-
-    // Hide all sections
-    sections.forEach(section => {
-        section.style.display = "none";
-    });
-
-    // Show the selected screen
-    const screenToShow = document.getElementById(screenId);
-    if (screenToShow) {
-        screenToShow.style.display = "block";
-    } else {
-        console.error(`Screen with ID "${screenId}" not found.`);
-    }
-}
 
 // Load product data from JSON and store it in productsData
 let productsData = [];
@@ -191,35 +174,9 @@ function searchProductByUPC(upc) {
     }
 }
 
-
-// Show the welcome screen on page load
-document.addEventListener("DOMContentLoaded", () => {
-    showScreen("welcome-screen");
-});
-
-
-
-// Function to show a specific screen by ID and hide all others
-function showScreen(screenId) {
-    const sections = document.querySelectorAll("section");
-
-    // Hide all sections
-    sections.forEach(section => {
-        section.style.display = "none";
-    });
-
-    // Show the selected screen
-    const screenToShow = document.getElementById(screenId);
-    if (screenToShow) {
-        screenToShow.style.display = "block";
-    } else {
-        console.error(`Screen with ID "${screenId}" not found.`);
-    }
-}
-
 // Show the home screen on page load
 document.addEventListener("DOMContentLoaded", () => {
-    showScreen("home-screen");
+    showScreen("welcome-screen");
 });
 
 
