@@ -164,54 +164,64 @@ button:hover {
 .comparison-box {
     display: flex;
     justify-content: space-between;
-    gap: 30px;
+    gap: 20px;
     width: 100%;
+    max-width: 800px; /* Adjusted for larger layout */
 }
 
 .product {
     background-color: #ffffff;
-    padding: 25px;
+    padding: 20px;
     border-radius: 10px;
     flex: 1;
     text-align: center;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    gap: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    max-width: 350px; /* Limiting width for balanced layout */
 }
 
 .product h3 {
-    font-size: 1.8em; /* Reduced size for consistency */
+    font-size: 1.6em; /* Reduced for better fit */
     color: #333;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
     font-weight: 400;
+    position: relative;
 }
 
 .product p {
     color: #555;
     font-size: 1em;
-    margin: 15px 0;
+    margin: 10px 0;
     font-weight: 300;
 }
 
-/* Product Images in Comparison Screen */
 .comparison-box .product img {
-    width: 100px;
-    height: 100px;
+    width: 120px; /* Larger image for better visibility */
+    height: auto;
     border-radius: 5px;
-    margin-bottom: 15px;
-    padding: 10px;
-    background-color: #ffffff;
+    margin-bottom: 10px;
 }
 
 /* Best Choice Label */
 .best-choice-label {
     background-color: #ffdd57;
     color: #333;
-    padding: 8px 12px;
+    padding: 5px 10px;
     border-radius: 5px;
-    font-size: 1.2em;
-    font-weight: 400;
-    margin-left: 15px;
+    font-size: 0.9em;
+    font-weight: 600;
+    margin-top: 10px;
+    text-align: center;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
 }
+
+
 
 /* User Settings Screen Styling */
 label {
@@ -270,4 +280,56 @@ input[type="range"]::-moz-range-thumb {
     border-radius: 8px;
     padding: 10px;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+
+
+/* Styles for the top-right "?" button */
+.info-button {
+    position: absolute;
+    top: 165px; 
+    right: 680px; 
+    background-color: #ffdd57;
+    color: #333;
+    font-size: 1.2em;
+    padding: 5px; 
+    border: none;
+    border-radius: 50%;
+    width: 35px; 
+    height: 35px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Styling for Sustainability Info screen */
+#sustainability-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    gap: 10px;
+}
+
+/* Increase font size for the heading */
+#sustainability-info h2 {
+    font-size: 2.3em; /* Adjust as needed */
+}
+
+/* Increase font size for paragraphs */
+#sustainability-info p {
+    font-size: 1.4em; /* Adjust as needed */
+}
+
+#sustainability-info a {
+    color: #0066cc;
+    text-decoration: none;
+    font-size: 1.4em; /* Increase for the link */
+}
+
+#sustainability-info a:hover {
+    text-decoration: underline;
 }
