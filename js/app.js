@@ -191,7 +191,77 @@ function searchProductByUPC(upc) {
     }
 }
 
+
 // Show the welcome screen on page load
 document.addEventListener("DOMContentLoaded", () => {
     showScreen("welcome-screen");
+});
+
+
+
+// Function to show a specific screen by ID and hide all others
+function showScreen(screenId) {
+    const sections = document.querySelectorAll("section");
+
+    // Hide all sections
+    sections.forEach(section => {
+        section.style.display = "none";
+    });
+
+    // Show the selected screen
+    const screenToShow = document.getElementById(screenId);
+    if (screenToShow) {
+        screenToShow.style.display = "block";
+    } else {
+        console.error(`Screen with ID "${screenId}" not found.`);
+    }
+}
+
+// Show the home screen on page load
+document.addEventListener("DOMContentLoaded", () => {
+    showScreen("home-screen");
+});
+
+
+// Variable to store the previous screen
+let previousScreen = null;
+
+// Function to show a specific screen by ID and hide all others
+function showScreen(screenId) {
+    const sections = document.querySelectorAll("section");
+
+    // Hide all sections
+    sections.forEach(section => {
+        section.style.display = "none";
+    });
+
+    // Record the current screen as the previous screen before changing
+    if (screenId !== "sustainability-info") {  // Skip recording when going to sustainability-info
+        previousScreen = screenId;
+    }
+
+    // Show the selected screen
+    const screenToShow = document.getElementById(screenId);
+    if (screenToShow) {
+        screenToShow.style.display = "block";
+    } else {
+        console.error(`Screen with ID "${screenId}" not found.`);
+    }
+}
+
+// Function to go back to the previous screen
+function goBack() {
+    if (previousScreen) {
+        showScreen(previousScreen);
+    } else {
+        showScreen("home-screen");  // Default to home screen if no previous screen is set
+    }
+}
+
+// Usage: Update the back button on the sustainability-info screen
+document.querySelector("#sustainability-info button").onclick = goBack;
+
+// Example usage for other back buttons
+document.querySelectorAll(".back-button").forEach(button => {
+    button.onclick = goBack;
 });
