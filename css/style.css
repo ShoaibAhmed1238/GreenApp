@@ -169,6 +169,20 @@ button:hover {
     max-width: 800px; /* Adjusted for larger layout */
 }
 
+/* Align Feedback and Back buttons side-by-side */
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px;
+}
+
+/* Optional: Style feedback-section to separate it from other content */
+#feedback-section {
+    margin-bottom: 15px;
+}
+
+
 .product {
     background-color: #ffffff;
     padding: 20px;
