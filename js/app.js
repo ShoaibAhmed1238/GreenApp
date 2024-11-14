@@ -215,7 +215,6 @@ function submitFeedback() {
 // Variable to store the previous screen
 let previousScreen = null;
 
-// Function to show a specific screen by ID and hide all others
 function showScreen(screenId) {
     const sections = document.querySelectorAll("section");
 
@@ -224,9 +223,12 @@ function showScreen(screenId) {
         section.style.display = "none";
     });
 
-    // Record the current screen as the previous screen before changing
-    if (screenId !== "sustainability-info") {  // Skip recording when going to sustainability-info
-        previousScreen = screenId;
+    // Show or hide the settings button based on the screen
+    const settingsButton = document.getElementById("settings-button");
+    if (screenId === "welcome-screen") {
+        settingsButton.style.display = "none"; // Hide on welcome screen
+    } else {
+        settingsButton.style.display = "flex"; // Show on other screens
     }
 
     // Show the selected screen
@@ -237,6 +239,7 @@ function showScreen(screenId) {
         console.error(`Screen with ID "${screenId}" not found.`);
     }
 }
+
 
 // Function to go back to the previous screen
 function goBack() {
