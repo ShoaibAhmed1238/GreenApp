@@ -179,6 +179,38 @@ document.addEventListener("DOMContentLoaded", () => {
     showScreen("welcome-screen");
 });
 
+// Function to show the Submit button after clicking Feedback
+function showSubmitButton() {
+    // Show the Submit button and feedback text area when Feedback is clicked
+    document.getElementById('submit-button').style.display = 'inline-block';
+    document.getElementById('feedback-text').style.display = 'block';
+}
+
+
+// Function to handle Feedback submission with confirmation
+function submitFeedback() {
+    // Capture feedback text
+    const feedbackText = document.getElementById("feedback-text").value;
+    
+    if (feedbackText.trim() === "") {
+        alert("Please enter your feedback before submitting.");
+        return;
+    }
+    
+    console.log("Feedback submitted:", feedbackText); // For debugging or saving feedback data
+
+    // Show checkmark to confirm submission
+    const checkmark = document.getElementById("checkmark");
+    checkmark.style.display = "inline-block";
+    checkmark.classList.add("show");
+
+    // Clear feedback text after submission
+    document.getElementById("feedback-text").value = "";
+
+    // Show the Back button
+    document.getElementById("back-button").style.display = "inline-block";
+}
+
 
 // Variable to store the previous screen
 let previousScreen = null;
