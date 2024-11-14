@@ -36,6 +36,7 @@
             <button onclick="searchProduct()">Go</button>
             <p>Or</p>
             <button onclick="scanBarcode()">Click to open camera</button>
+            <button onclick="showScreen('feedback-screen')">Feedback</button>
         </section>
 
         <!-- Tutorial Screen -->
@@ -48,13 +49,13 @@
 
         <!-- Product Detail Screen Template -->
         <section id="product-detail-template" style="display: none;">
-            <button class="info-button" onclick="showScreen('sustainability-info')">?</button>
             <div class="product-header">
                 <div class="product-image-placeholder">
                     <img id="product-image" src="" alt="Product Image" style="width: 80px; height: 80px; border-radius: 5px;">
                 </div>
                 <div>
-                    <h2 id="product-name">Product Name</h2>
+                    <h2 id="product-name">Simple Green</h2>
+                    <button class="info-button" onclick="showScreen('sustainability-info')">?</button>
                     <p id="product-type">Type: Product Type</p>
                 </div>
             </div>
@@ -78,11 +79,8 @@
         <!-- Sustainability Info Screen -->
         <section id="sustainability-info" style="display: none;">
             <h2>Sustainability Information</h2>
-            <br>
             <p><strong>Sustainability Score:</strong> 114.5</p>
-            <br>
             <p><strong>Data Source:</strong> <a href="https://www.seventhgeneration.com/blog/corporate-consciousness-2022" target="_blank">Seventh Generation Blog</a></p>
-            <br>
             <button onclick="goBack()">Back</button>
         </section>
 
@@ -95,31 +93,27 @@
                     <img id="simple-green-image" src="images/simple_green.png" alt="Simple Green All-Purpose Cleaner">
                     <p><strong>Pros:</strong> Environmental focus, Innovative and safe ingredients</p>
                     <p><strong>Cons:</strong> Packaging not compostable</p>
-                    <span class="best-choice-label">Best Choice</span>
                 </div>
                 <div class="product" id="product-seventh-generation">
                     <h3>Seventh Generation</h3>
                     <img id="seventh-generation-image" src="images/seventh_generation.png" alt="Seventh Generation Image">
                     <p><strong>Pros:</strong> Transparency and regulatory compliance, Commitment to sustainability</p>
                     <p><strong>Cons:</strong> Product price</p>
+                    <span class="best-choice-label">Best Choice</span>
                 </div>
             </div>
-
-            <!-- Feedback Section -->
-            <div id="feedback-section">
-                <button id="feedback-button" onclick="showSubmitButton()">Feedback</button>
-                <button id="submit-button" style="display: none;" onclick="submitFeedback()">Submit</button>
-                <textarea id="feedback-text" placeholder="Enter your feedback here..." rows="4" style="width: 100%; padding: 10px; margin-top: 10px; display: none;"></textarea>
-                <span class="checkmark" id="checkmark" style="display: none;">✔️ Submitted</span>
-            </div>
-
-
-            <!-- Button Container for Feedback and Back Buttons -->
-            <div class="button-container">
-                <button onclick="showScreen('home-screen')">Back</button>
-            </div>
+            <button onclick="showScreen('home-screen')">Back</button>
         </section>
 
+        <!-- Feedback Screen -->
+        <section id="feedback-screen" style="display: none;">
+            <h2>Submit Your Feedback</h2>
+            <input type="text" id="user-name" placeholder="Your Name" required>
+            <textarea id="feedback-text" placeholder="Enter your feedback here..." rows="4" required></textarea>
+            <button onclick="submitFeedback()">Submit</button>
+            <span class="checkmark" id="checkmark" style="display: none;">✔️ Submitted</span>
+            <button onclick="showScreen('home-screen')">Back</button>
+        </section>
 
         <!-- Barcode Scan Screen -->
         <section id="barcode-scan-screen" style="display: none;">
@@ -141,7 +135,7 @@
             <button onclick="showScreen('home-screen')">Back</button>
         </section>
     </div>
-        <button id="settings-button" onclick="showScreen('user-settings-screen')">⚙️</button>
+    <button id="settings-button" onclick="showScreen('user-settings-screen')">⚙️</button>
 
     <script src="js/app.js"></script>
 </body>

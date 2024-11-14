@@ -1,4 +1,3 @@
-
 // Load product data from JSON and store it in productsData
 let productsData = [];
 
@@ -59,12 +58,7 @@ function showComparison() {
                 simpleGreenImage.src = "images/placeholder.png"; // Fallback image
                 simpleGreenImage.alt = "Image not available";
             };
-            console.log("Simple Green image set successfully.");
-        } else {
-            console.error("Simple Green image element not found.");
         }
-    } else {
-        console.error("Simple Green product data not found.");
     }
 
     if (seventhGen) {
@@ -76,9 +70,7 @@ function showComparison() {
                 seventhGenImage.src = "images/placeholder.png"; // Fallback image
                 seventhGenImage.alt = "Image not available";
             };
-            console.log("Seventh Generation image set successfully.");
 
-            // Add the "Best Choice" label dynamically to the best choice product
             const bestChoiceLabel = document.createElement("span");
             bestChoiceLabel.className = "best-choice-label";
             bestChoiceLabel.innerText = "Best Choice";
@@ -86,13 +78,8 @@ function showComparison() {
             const seventhGenTitle = document.querySelector("#product-seventh-generation h3");
             if (seventhGenTitle && !seventhGenTitle.querySelector(".best-choice-label")) {
                 seventhGenTitle.appendChild(bestChoiceLabel);
-                console.log("Best Choice label added to Seventh Generation.");
             }
-        } else {
-            console.error("Seventh Generation image element not found.");
         }
-    } else {
-        console.error("Seventh Generation product data not found.");
     }
 
     showScreen("comparison-screen");
@@ -174,43 +161,50 @@ function searchProductByUPC(upc) {
     }
 }
 
-// Show the home screen on page load
-document.addEventListener("DOMContentLoaded", () => {
-    showScreen("welcome-screen");
-});
-
-// Function to show the Submit button after clicking Feedback
-function showSubmitButton() {
-    // Show the Submit button and feedback text area when Feedback is clicked
-    document.getElementById('submit-button').style.display = 'inline-block';
+// Function to show the Feedback screen with name input and feedback box
+function showFeedbackScreen() {
+    document.getElementById('feedback-name').style.display = 'block';
     document.getElementById('feedback-text').style.display = 'block';
+    document.getElementById('submit-button').style.display = 'inline-block';
+    showScreen("feedback-screen");
 }
 
-
-// Function to handle Feedback submission with confirmation
+// Function to handle Feedback submission with confirmation and local storage
 function submitFeedback() {
-    // Capture feedback text
-    const feedbackText = document.getElementById("feedback-text").value;
+    const name = document.getElementById("user-name").value.trim();
+    const feedbackText = document.getElementById("feedback-text").value.trim();
     
-    if (feedbackText.trim() === "") {
-        alert("Please enter your feedback before submitting.");
+    if (!name || !feedbackText) {
+        alert("Please enter both your name and feedback before submitting.");
         return;
     }
     
-    console.log("Feedback submitted:", feedbackText); // For debugging or saving feedback data
+    const feedbackData = { name, feedback: feedbackText };
+    let storedFeedback = JSON.parse(localStorage.getItem("feedback")) || [];
+    storedFeedback.push(feedbackData);
+    localStorage.setItem("feedback", JSON.stringify(storedFeedback));
 
-    // Show checkmark to confirm submission
+    console.log("Feedback submitted:", feedbackData);
+
+    // Show confirmation
     const checkmark = document.getElementById("checkmark");
     checkmark.style.display = "inline-block";
     checkmark.classList.add("show");
 
-    // Clear feedback text after submission
+    // Reset inputs
+    document.getElementById("user-name").value = "";
     document.getElementById("feedback-text").value = "";
 
-    // Show the Back button
-    document.getElementById("back-button").style.display = "inline-block";
+    setTimeout(() => {
+        checkmark.classList.remove("show");
+        checkmark.style.display = "none";
+    }, 2000);
 }
 
+// Show the home screen on page load
+document.addEventListener("DOMContentLoaded", () => {
+    showScreen("welcome-screen");
+});
 
 // Variable to store the previous screen
 let previousScreen = null;
@@ -223,15 +217,9 @@ function showScreen(screenId) {
         section.style.display = "none";
     });
 
-    // Show or hide the settings button based on the screen
     const settingsButton = document.getElementById("settings-button");
-    if (screenId === "welcome-screen") {
-        settingsButton.style.display = "none"; // Hide on welcome screen
-    } else {
-        settingsButton.style.display = "flex"; // Show on other screens
-    }
+    settingsButton.style.display = screenId === "welcome-screen" ? "none" : "flex";
 
-    // Show the selected screen
     const screenToShow = document.getElementById(screenId);
     if (screenToShow) {
         screenToShow.style.display = "block";
@@ -240,13 +228,12 @@ function showScreen(screenId) {
     }
 }
 
-
 // Function to go back to the previous screen
 function goBack() {
     if (previousScreen) {
         showScreen(previousScreen);
     } else {
-        showScreen("home-screen");  // Default to home screen if no previous screen is set
+        showScreen("home-screen");
     }
 }
 

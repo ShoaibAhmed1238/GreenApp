@@ -7,7 +7,7 @@
 
 body {
     font-family: 'Titan One', Arial, sans-serif;
-    background-color: #90ee91;
+    background-color: #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -27,19 +27,45 @@ body {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
     background-color: #90ee91;
     padding-bottom: 20px;
+    position: relative;
 }
 
+/* Header styling */
 header {
     background-color: #333;
     color: #90ee91;
     padding: 30px;
     text-align: center;
+    position: relative;
 }
 
 header h1 {
-    font-size: 3em; /* Adjusted for emphasis without overwhelming */
+    font-size: 3em;
     font-weight: 400;
     margin-bottom: 10px;
+}
+
+/* Settings Button in top-right corner of the header */
+#settings-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: #333;
+    color: white;
+    font-size: 1.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+#settings-button:hover {
+    background-color: #555;
 }
 
 /* General Section Styling */
@@ -56,8 +82,10 @@ section {
     align-items: center;
     text-align: center;
     gap: 20px;
+    position: relative;
 }
 
+/* Home Screen Input */
 #home-screen input[type="text"] {
     width: 100%;
     padding: 15px;
@@ -68,6 +96,7 @@ section {
     font-size: 1.2em;
 }
 
+/* Product Header */
 .product-header {
     display: flex;
     align-items: center;
@@ -75,6 +104,7 @@ section {
     margin-bottom: 25px;
     width: 100%;
     gap: 20px;
+    position: relative;
 }
 
 .product-image-placeholder {
@@ -93,7 +123,7 @@ section {
 }
 
 .product-header h2 {
-    font-size: 2.5em; /* Adjusted for balance */
+    font-size: 2.5em;
     color: #333;
     margin: 0;
     font-weight: 400;
@@ -102,7 +132,7 @@ section {
 .product-header p {
     color: #555;
     margin: 10px 0;
-    font-size: 1.5em; /* Adjusted for readability */
+    font-size: 1.5em;
     font-weight: 300;
 }
 
@@ -114,7 +144,7 @@ section {
 }
 
 .product-details h3 {
-    font-size: 1.8em; /* Reduced to maintain consistency */
+    font-size: 1.8em;
     margin-top: 20px;
     color: #333;
     font-weight: 400;
@@ -127,6 +157,26 @@ section {
     font-weight: 300;
 }
 
+/* Question Mark ("?") Button */
+.info-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #ffdd57;
+    color: #333;
+    font-size: 1.2em;
+    padding: 5px;
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
 /* Button Styling */
 button {
     background-color: #333;
@@ -137,7 +187,7 @@ button {
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    font-size: 1.6em; /* Reduced size for balance */
+    font-size: 1.6em;
     font-weight: 400;
     font-family: 'Titan One', Arial, sans-serif;
     margin: 20px 0;
@@ -147,7 +197,28 @@ button:hover {
     background-color: #555;
 }
 
-/* Checkmark for feedback confirmation */
+/* Feedback Screen Styling */
+#feedback-screen input[type="text"], 
+#feedback-screen textarea {
+    width: 90%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 1em;
+    margin-bottom: 15px;
+}
+
+#feedback-screen input[type="text"]::placeholder, 
+#feedback-screen textarea::placeholder {
+    color: #999;
+}
+
+#feedback-screen textarea {
+    resize: none;
+    font-family: Arial, sans-serif;
+}
+
+/* Submit Confirmation Checkmark */
 .checkmark {
     font-size: 1.5em;
     color: green;
@@ -166,10 +237,9 @@ button:hover {
     justify-content: space-between;
     gap: 20px;
     width: 100%;
-    max-width: 800px; /* Adjusted for larger layout */
+    max-width: 800px;
 }
 
-/* Align Feedback and Back buttons side-by-side */
 .button-container {
     display: flex;
     justify-content: space-between;
@@ -177,11 +247,9 @@ button:hover {
     padding: 10px;
 }
 
-/* Optional: Style feedback-section to separate it from other content */
 #feedback-section {
     margin-bottom: 15px;
 }
-
 
 .product {
     background-color: #ffffff;
@@ -194,15 +262,14 @@ button:hover {
     flex-direction: column;
     align-items: center;
     gap: 10px;
-    max-width: 350px; /* Limiting width for balanced layout */
+    max-width: 350px;
 }
 
 .product h3 {
-    font-size: 1.6em; /* Reduced for better fit */
+    font-size: 1.6em;
     color: #333;
     margin-bottom: 5px;
     font-weight: 400;
-    position: relative;
 }
 
 .product p {
@@ -213,7 +280,7 @@ button:hover {
 }
 
 .comparison-box .product img {
-    width: 120px; /* Larger image for better visibility */
+    width: 120px;
     height: auto;
     border-radius: 5px;
     margin-bottom: 10px;
@@ -235,11 +302,8 @@ button:hover {
     display: block;
 }
 
-
-
-/* User Settings Screen Styling */
 label {
-    font-size: 1.4em; /* Adjusted for readability */
+    font-size: 1.4em;
     color: #333;
     margin-top: 20px;
     font-weight: 400;
@@ -256,16 +320,7 @@ input[type="range"] {
     border-radius: 5px;
 }
 
-input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 25px;
-    height: 25px;
-    background-color: #333;
-    border-radius: 50%;
-    cursor: pointer;
-}
-
+input[type="range"]::-webkit-slider-thumb,
 input[type="range"]::-moz-range-thumb {
     width: 25px;
     height: 25px;
@@ -274,70 +329,14 @@ input[type="range"]::-moz-range-thumb {
     cursor: pointer;
 }
 
-/* Home Screen Image Styling */
-.home-image {
+/* Image Styling */
+.home-image, .welcome-image {
     width: 80%;
     max-width: 300px;
     margin: 20px 0;
     background-color: #ffffff;
     border-radius: 8px;
     padding: 10px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-/* Welcome Screen Image Styling */
-.welcome-image {
-    width: 70%;
-    max-width: 250px;
-    margin: 20px 0;
-    background-color: #ffffff;
-    border-radius: 8px;
-    padding: 10px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-/* Settings Button Styling */
-#settings-button {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: #333;
-    color: white;
-    font-size: 1.5em;
-    display: none; /* Hidden by default */
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    border: none;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-}
-
-#settings-button:hover {
-    background-color: #555;
-}
-
-
-
-/* Styles for the top-right "?" button */
-.info-button {
-    position: absolute;
-    top: 165px; 
-    right: 680px; 
-    background-color: #ffdd57;
-    color: #333;
-    font-size: 1.2em;
-    padding: 5px; 
-    border: none;
-    border-radius: 50%;
-    width: 35px; 
-    height: 35px; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
@@ -351,20 +350,18 @@ input[type="range"]::-moz-range-thumb {
     gap: 10px;
 }
 
-/* Increase font size for the heading */
 #sustainability-info h2 {
-    font-size: 2.3em; /* Adjust as needed */
+    font-size: 2.3em;
 }
 
-/* Increase font size for paragraphs */
 #sustainability-info p {
-    font-size: 1.4em; /* Adjust as needed */
+    font-size: 1.4em;
 }
 
 #sustainability-info a {
     color: #0066cc;
     text-decoration: none;
-    font-size: 1.4em; /* Increase for the link */
+    font-size: 1.4em;
 }
 
 #sustainability-info a:hover {
