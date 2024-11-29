@@ -44,60 +44,86 @@ function searchProduct() {
     }
 }
 
-// Function to display the comparison screen with images and "Best Choice" label
-function showComparison() {
-    const simpleGreen = productsData.find(p => p.id === "simple_green");
-    const seventhGen = productsData.find(p => p.id === "seventh_generation");
+// Function to display saved products in the library
+function showLibrary() {
+    const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    const libraryContainer = document.getElementById("library-container");
+    libraryContainer.innerHTML = "";
 
-    if (simpleGreen) {
-        const simpleGreenImage = document.getElementById("simple-green-image");
-        if (simpleGreenImage) {
-            simpleGreenImage.src = simpleGreen.image;
-            simpleGreenImage.alt = `${simpleGreen.name} Image`;
-            simpleGreenImage.onerror = () => {
-                simpleGreenImage.src = "images/placeholder.png"; // Fallback image
-                simpleGreenImage.alt = "Image not available";
-            };
-        }
+    if (favorites.length === 0) {
+        libraryContainer.innerHTML = "<p>No saved products yet.</p>";
+        return;
     }
 
-    if (seventhGen) {
-        const seventhGenImage = document.getElementById("seventh-generation-image");
-        if (seventhGenImage) {
-            seventhGenImage.src = seventhGen.image;
-            seventhGenImage.alt = `${seventhGen.name} Image`;
-            seventhGenImage.onerror = () => {
-                seventhGenImage.src = "images/placeholder.png"; // Fallback image
-                seventhGenImage.alt = "Image not available";
-            };
-
-            const bestChoiceLabel = document.createElement("span");
-            bestChoiceLabel.className = "best-choice-label";
-            bestChoiceLabel.innerText = "Best Choice";
-
-            const seventhGenTitle = document.querySelector("#product-seventh-generation h3");
-            if (seventhGenTitle && !seventhGenTitle.querySelector(".best-choice-label")) {
-                seventhGenTitle.appendChild(bestChoiceLabel);
-            }
+    favorites.forEach(productId => {
+        const product = productsData.find(p => p.id === productId);
+        if (product) {
+            const productCard = `
+                <div class="product">
+                    <img src="${product.image}" alt="${product.name}" style="width: 80px; height: 80px;">
+                    <h3>${product.name}</h3>
+                    <p>${product.type}</p>
+                </div>`;
+            libraryContainer.innerHTML += productCard;
         }
-    }
+    });
 
-    showScreen("comparison-screen");
+    showScreen("library-screen");
 }
 
-// Function to handle "Add to Favorites" action with feedback confirmation
-function addToFavorites() {
-    const checkmark = document.getElementById("favorite-checkmark");
+// Function to filter library products by type
+function filterLibrary() {
+    const filter = document.getElementById("filter-select").value;
+    const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    const libraryContainer = document.getElementById("library-container");
+    libraryContainer.innerHTML = "";
 
+    const filteredProducts = productsData.filter(product =>
+        favorites.includes(product.id) && (!filter || product.type === filter)
+    );
+
+    if (filteredProducts.length === 0) {
+        libraryContainer.innerHTML = "<p>No products match this filter.</p>";
+    } else {
+        filteredProducts.forEach(product => {
+            const productCard = `
+                <div class="product">
+                    <img src="${product.image}" alt="${product.name}" style="width: 80px; height: 80px;">
+                    <h3>${product.name}</h3>
+                    <p>${product.type}</p>
+                </div>`;
+            libraryContainer.innerHTML += productCard;
+        });
+    }
+}
+
+// Function to handle adding a product to favorites with feedback
+function addToFavorites(productId) {
+    let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    if (!favorites.includes(productId)) {
+        favorites.push(productId);
+        localStorage.setItem("favorites", JSON.stringify(favorites));
+    }
+
+    const checkmark = document.getElementById("favorite-checkmark");
     checkmark.style.display = "block";
     checkmark.classList.add("show");
 
     setTimeout(() => {
         checkmark.classList.remove("show");
-        setTimeout(() => {
-            checkmark.style.display = "none";
-        }, 500);
+        checkmark.style.display = "none";
     }, 2000);
+}
+
+// Function to display sustainability information
+function showSustainabilityInfo(productId) {
+    const product = productsData.find(p => p.id === productId);
+    if (product && product.attributes) {
+        document.getElementById("carbon-footprint").innerText = product.attributes.carbon_footprint;
+        document.getElementById("materials").innerText = product.attributes.materials;
+        document.getElementById("certifications").innerText = product.attributes.certifications.join(", ");
+    }
+    showScreen("sustainability-info");
 }
 
 // Function to scan barcode with camera permission
@@ -129,7 +155,7 @@ function startBarcodeScan(videoElement) {
             canvasElement.width = videoElement.videoWidth;
             canvasElement.height = videoElement.videoHeight;
             canvasContext.drawImage(videoElement, 0, 0, canvasElement.width, canvasElement.height);
-            
+
             const imageData = canvasContext.getImageData(0, 0, canvasElement.width, canvasElement.height);
             const code = jsQR(imageData.data, imageData.width, imageData.height);
 
@@ -152,46 +178,25 @@ function stopBarcodeScan() {
     showScreen("home-screen");
 }
 
-function searchProductByUPC(upc) {
-    const product = productsData.find(p => p.upc === upc.trim());
-    if (product) {
-        showProductDetail(product.id);
-    } else {
-        alert("Product not found. Please enter a valid UPC code.");
-    }
-}
-
-// Function to show the Feedback screen with name input and feedback box
-function showFeedbackScreen() {
-    document.getElementById('feedback-name').style.display = 'block';
-    document.getElementById('feedback-text').style.display = 'block';
-    document.getElementById('submit-button').style.display = 'inline-block';
-    showScreen("feedback-screen");
-}
-
-// Function to handle Feedback submission with confirmation and local storage
+// Function to handle feedback submission
 function submitFeedback() {
     const name = document.getElementById("user-name").value.trim();
     const feedbackText = document.getElementById("feedback-text").value.trim();
-    
+
     if (!name || !feedbackText) {
         alert("Please enter both your name and feedback before submitting.");
         return;
     }
-    
+
     const feedbackData = { name, feedback: feedbackText };
     let storedFeedback = JSON.parse(localStorage.getItem("feedback")) || [];
     storedFeedback.push(feedbackData);
     localStorage.setItem("feedback", JSON.stringify(storedFeedback));
 
-    console.log("Feedback submitted:", feedbackData);
-
-    // Show confirmation
     const checkmark = document.getElementById("checkmark");
     checkmark.style.display = "inline-block";
     checkmark.classList.add("show");
 
-    // Reset inputs
     document.getElementById("user-name").value = "";
     document.getElementById("feedback-text").value = "";
 
@@ -201,21 +206,10 @@ function submitFeedback() {
     }, 2000);
 }
 
-// Show the home screen on page load
-document.addEventListener("DOMContentLoaded", () => {
-    showScreen("welcome-screen");
-});
-
-// Variable to store the previous screen
-let previousScreen = null;
-
+// Show the specified screen
 function showScreen(screenId) {
     const sections = document.querySelectorAll("section");
-
-    // Hide all sections
-    sections.forEach(section => {
-        section.style.display = "none";
-    });
+    sections.forEach(section => section.style.display = "none");
 
     const settingsButton = document.getElementById("settings-button");
     settingsButton.style.display = screenId === "welcome-screen" ? "none" : "flex";
@@ -228,19 +222,7 @@ function showScreen(screenId) {
     }
 }
 
-// Function to go back to the previous screen
-function goBack() {
-    if (previousScreen) {
-        showScreen(previousScreen);
-    } else {
-        showScreen("home-screen");
-    }
-}
-
-// Usage: Update the back button on the sustainability-info screen
-document.querySelector("#sustainability-info button").onclick = goBack;
-
-// Example usage for other back buttons
-document.querySelectorAll(".back-button").forEach(button => {
-    button.onclick = goBack;
+// Initialize app on page load
+document.addEventListener("DOMContentLoaded", () => {
+    showScreen("welcome-screen");
 });

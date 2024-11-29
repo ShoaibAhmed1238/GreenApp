@@ -7,6 +7,11 @@
             "type": "Multi-purpose cleaner",
             "practices": "Committed to environmental protection and safety. Includes EPA Safer Choice certification.",
             "environment": "Prioritizes environmental and human safety with non-toxic, biodegradable formula. Packaging is recyclable.",
+            "attributes": {
+                "carbon_footprint": "Low",
+                "materials": "Biodegradable",
+                "certifications": ["EPA Safer Choice"]
+            },
             "pros": ["Environmental focus", "Innovative and safe ingredients"],
             "cons": ["Packaging not compostable"],
             "image": "images/simple_green.png"
@@ -18,9 +23,46 @@
             "type": "Multi-purpose cleaner",
             "practices": "Committed to a sustainable, equitable future with climate-friendly initiatives and EPA Safer Choice certification.",
             "environment": "Promotes transparency and uses plant-based ingredients. Packaging is 100% recycled plastic.",
+            "attributes": {
+                "carbon_footprint": "Moderate",
+                "materials": "Recycled plastic",
+                "certifications": ["EPA Safer Choice", "Cruelty-Free"]
+            },
             "pros": ["Transparency and regulatory compliance", "Commitment to sustainability"],
             "cons": ["Product price"],
             "image": "images/seventh_generation.png"
+        },
+        {
+            "id": "mrs_meyers_clean_day",
+            "upc": "808124173558",
+            "name": "Mrs. Meyer's Clean Day",
+            "type": "Household cleaner",
+            "practices": "Dedicated to creating garden-inspired, cruelty-free products made with plant-derived ingredients.",
+            "environment": "Uses biodegradable and recyclable materials. Packaging is made from 25% post-consumer plastic.",
+            "attributes": {
+                "carbon_footprint": "Low",
+                "materials": "Plant-based",
+                "certifications": ["Leaping Bunny Certified"]
+            },
+            "pros": ["Pleasant fragrances", "Cruelty-free"],
+            "cons": ["Higher cost per use"],
+            "image": "images/mrs_meyers_clean_day.png"
+        },
+        {
+            "id": "ecover_laundry",
+            "upc": "728997173994",
+            "name": "Ecover Laundry Detergent",
+            "type": "Laundry detergent",
+            "practices": "Eco-friendly formula using renewable plant-based ingredients.",
+            "environment": "Concentrated formula reduces packaging. Biodegradable and safe for aquatic life.",
+            "attributes": {
+                "carbon_footprint": "Low",
+                "materials": "Biodegradable",
+                "certifications": ["B Corporation Certified"]
+            },
+            "pros": ["Gentle on clothes", "Safe for sensitive skin"],
+            "cons": ["Limited availability in stores"],
+            "image": "images/ecover_laundry.png"
         }
     ]
 }

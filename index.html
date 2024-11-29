@@ -29,19 +29,23 @@
         <!-- Home Screen -->
         <section id="home-screen" style="display: none;">
             <h2>Search for Products</h2>
-            <p>Helping users make environmentally conscious ping choishopces.</p>
+            <p>Helping users make environmentally conscious shopping choices.</p>
             <img src="images/clean.png" alt="Clean Environment" class="home-image">
             <input type="text" placeholder="Enter UPC code">
             <button onclick="searchProduct()">Go</button>
             <p>Or</p>
             <button onclick="scanBarcode()">Click to open camera</button>
             <button onclick="showScreen('feedback-screen')">Feedback</button>
+            <button onclick="showLibrary()">View Library</button>
         </section>
 
         <!-- Tutorial Screen -->
         <section id="tutorial-screen" style="display: none;">
             <h2>Need Help?</h2>
-            <p>Video showing how to use GreenApp</p>
+            <video id="tutorial-video" controls>
+                <source src="videos/tutorial.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
             <p>More questions? Reach out to us: Support@GreenApp.com</p>
             <button onclick="showScreen('welcome-screen')">Back</button>
         </section>
@@ -53,34 +57,42 @@
                     <img id="product-image" src="" alt="Product Image" style="width: 80px; height: 80px; border-radius: 5px;">
                 </div>
                 <div>
-                    <h2 id="product-name">Simple Green</h2>
+                    <h2 id="product-name">Product Name</h2>
                     <button class="info-button" onclick="showScreen('sustainability-info')">?</button>
                     <p id="product-type">Type: Product Type</p>
                 </div>
             </div>
-            
             <div class="product-details">
-                <h3>Practices: <span class="info-icon" onclick="showTooltip('practices')"></span></h3>
-                <p id="product-practices">Committed to a sustainable, equitable future with climate-friendly initiatives and EPA Safer Choice certification.</p>
-                
-                <h3>Environment: <span class="info-icon" onclick="showTooltip('environment')"></span></h3>
-                <p id="product-environment">Promotes transparency and uses plant-based ingredients. Packaging is 100% recycled plastic.</p>
+                <h3>Practices:</h3>
+                <p id="product-practices"></p>
+                <h3>Environment:</h3>
+                <p id="product-environment"></p>
             </div>
-            
-            <div id="tooltip" class="tooltip" style="display: none;"></div>
-            
-            <button id="add-to-favorites-btn" onclick="addToFavorites()">Add to Favorites</button>
+            <button id="add-to-favorites-btn" onclick="addToFavorites('product_id')">Add to Favorites</button>
             <div id="favorite-checkmark" class="checkmark" style="display: none;">✔ Added to Favorites</div>
-            <button onclick="showScreen('comparison-screen')">Click To Compare</button>
+            <button onclick="showScreen('comparison-screen')">Compare</button>
             <button onclick="showScreen('home-screen')">Back</button>
         </section>
 
         <!-- Sustainability Info Screen -->
         <section id="sustainability-info" style="display: none;">
             <h2>Sustainability Information</h2>
-            <p><strong>Sustainability Score:</strong> 114.5</p>
-            <p><strong>Data Source:</strong> <a href="https://www.seventhgeneration.com/blog/corporate-consciousness-2022" target="_blank">Seventh Generation Blog</a></p>
+            <p><strong>Carbon Footprint:</strong> <span id="carbon-footprint"></span></p>
+            <p><strong>Materials:</strong> <span id="materials"></span></p>
+            <p><strong>Certifications:</strong> <span id="certifications"></span></p>
             <button onclick="goBack()">Back</button>
+        </section>
+
+        <!-- Library Screen -->
+        <section id="library-screen" style="display: none;">
+            <h2>Your Saved Products</h2>
+            <select id="filter-select" onchange="filterLibrary()">
+                <option value="">All</option>
+                <option value="Multi-purpose cleaner">Multi-purpose Cleaner</option>
+                <option value="Laundry detergent">Laundry Detergent</option>
+            </select>
+            <div id="library-container"></div>
+            <button onclick="showScreen('home-screen')">Back</button>
         </section>
 
         <!-- Comparison Screen -->
@@ -98,7 +110,7 @@
                     <img id="seventh-generation-image" src="images/seventh_generation.png" alt="Seventh Generation Image">
                     <p><strong>Pros:</strong> Transparency and regulatory compliance, Commitment to sustainability</p>
                     <p><strong>Cons:</strong> Product price</p>
-                    <span class="best-choice-label">Best Choice</span> 
+                    <span class="best-choice-label">Best Choice</span>
                 </div>
             </div>
             <button onclick="showScreen('home-screen')">Back</button>

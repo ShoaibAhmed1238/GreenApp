@@ -45,7 +45,7 @@ header h1 {
     margin-bottom: 10px;
 }
 
-/* Settings Button in top-right corner of the header */
+/* Settings Button */
 #settings-button {
     position: absolute;
     top: 10px;
@@ -157,7 +157,7 @@ section {
     font-weight: 300;
 }
 
-/* Question Mark ("?") Button */
+/* Info Button */
 .info-button {
     position: absolute;
     top: -50px;
@@ -197,7 +197,7 @@ button:hover {
     background-color: #555;
 }
 
-/* Feedback Screen Styling */
+/* Feedback Styling */
 #feedback-screen input[type="text"], 
 #feedback-screen textarea {
     width: 90%;
@@ -218,7 +218,7 @@ button:hover {
     font-family: Arial, sans-serif;
 }
 
-/* Submit Confirmation Checkmark */
+/* Submit Confirmation */
 .checkmark {
     font-size: 1.5em;
     color: green;
@@ -231,24 +231,13 @@ button:hover {
     opacity: 1;
 }
 
-/* Comparison Screen Styling */
+/* Comparison Screen */
 .comparison-box {
     display: flex;
     justify-content: space-between;
     gap: 20px;
     width: 100%;
     max-width: 800px;
-}
-
-.button-container {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    padding: 10px;
-}
-
-#feedback-section {
-    margin-bottom: 15px;
 }
 
 .product {
@@ -340,7 +329,7 @@ input[type="range"]::-moz-range-thumb {
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-/* Styling for Sustainability Info screen */
+/* Sustainability Info Screen */
 #sustainability-info {
     display: flex;
     flex-direction: column;
@@ -366,4 +355,19 @@ input[type="range"]::-moz-range-thumb {
 
 #sustainability-info a:hover {
     text-decoration: underline;
+}
+
+/* Library Screen */
+#library-screen {
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#library-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 15px;
 }
