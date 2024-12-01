@@ -371,3 +371,13 @@ input[type="range"]::-moz-range-thumb {
     justify-content: space-around;
     gap: 15px;
 }
+
+/* Style for the tutorial video */
+#tutorial-video {
+    width: 80%; /* Adjust the width of the video */
+    max-width: 400px; /* Set a maximum width for the video */
+    height: auto; /* Maintain the aspect ratio */
+    border-radius: 8px; /* Optional: Add rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Optional: Add a shadow for better aesthetics */
+    margin: 20px 0; /* Add spacing around the video */
+}

@@ -119,12 +119,27 @@ function addToFavorites(productId) {
 function showSustainabilityInfo(productId) {
     const product = productsData.find(p => p.id === productId);
     if (product && product.attributes) {
-        document.getElementById("carbon-footprint").innerText = product.attributes.carbon_footprint;
-        document.getElementById("materials").innerText = product.attributes.materials;
-        document.getElementById("certifications").innerText = product.attributes.certifications.join(", ");
+        // Populate sustainability information
+        document.getElementById("carbon-footprint").innerText = `Carbon Footprint: ${product.attributes.carbon_footprint || "N/A"}`;
+        document.getElementById("materials").innerText = `Materials: ${product.attributes.materials || "N/A"}`;
+        document.getElementById("certifications").innerText = `Certifications: ${product.attributes.certifications ? product.attributes.certifications.join(", ") : "N/A"}`;
+
+        // Add link to sustainability goals
+        const linkContainer = document.getElementById("sustainability-info-link");
+        linkContainer.innerHTML = ""; // Clear previous links if any
+        if (product.attributes.link) {
+            const linkElement = document.createElement("a");
+            linkElement.href = product.attributes.link;
+            linkElement.target = "_blank";
+            linkElement.innerText = "Learn more about sustainability here";
+            linkContainer.appendChild(linkElement);
+        }
+    } else {
+        alert("Sustainability information is missing for this product.");
     }
     showScreen("sustainability-info");
 }
+
 
 // Function to scan barcode with camera permission
 let videoStream = null;
@@ -222,7 +237,14 @@ function showScreen(screenId) {
     }
 }
 
+function goBack() {
+    // Navigate back to the product detail screen
+    showScreen("product-detail-template");
+}
+
+
 // Initialize app on page load
 document.addEventListener("DOMContentLoaded", () => {
     showScreen("welcome-screen");
 });
+

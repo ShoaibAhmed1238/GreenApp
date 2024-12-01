@@ -43,12 +43,14 @@
         <section id="tutorial-screen" style="display: none;">
             <h2>Need Help?</h2>
             <video id="tutorial-video" controls>
-                <source src="videos/tutorial.mp4" type="video/mp4">
+                <source src="Videos/tutorial-video.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
             <p>More questions? Reach out to us: Support@GreenApp.com</p>
             <button onclick="showScreen('welcome-screen')">Back</button>
         </section>
+        
+        
 
         <!-- Product Detail Screen Template -->
         <section id="product-detail-template" style="display: none;">
@@ -77,11 +79,17 @@
         <!-- Sustainability Info Screen -->
         <section id="sustainability-info" style="display: none;">
             <h2>Sustainability Information</h2>
-            <p><strong>Carbon Footprint:</strong> <span id="carbon-footprint"></span></p>
-            <p><strong>Materials:</strong> <span id="materials"></span></p>
-            <p><strong>Certifications:</strong> <span id="certifications"></span></p>
+            <p><br><br><strong>Carbon Footprint:</strong> <span id="carbon-footprint">114</span><br><br></p>
+            <p><strong>Materials:</strong> <span id="materials">Recycled Plastic</span><br><br></p>
+            <p><strong>Certifications:</strong> <span id="certifications">EPA Approved, Cruelty-Free</span><br><br></p>
+            <div id="sustainability-info-link">
+                <a href="https://www.seventhgeneration.com/company/goals-impact" target="_blank">
+                    Learn more about sustainability here
+                </a>
+            </div>
             <button onclick="goBack()">Back</button>
         </section>
+
 
         <!-- Library Screen -->
         <section id="library-screen" style="display: none;">
