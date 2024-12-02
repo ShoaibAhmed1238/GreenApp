@@ -31,12 +31,12 @@
             <h2>Search for Products</h2>
             <p>Helping users make environmentally conscious shopping choices.</p>
             <img src="images/clean.png" alt="Clean Environment" class="home-image">
-            <input type="text" placeholder="Enter UPC code">
-            <button onclick="searchProduct()">Go</button>
+            <input id="upc-input" type="text" placeholder="Enter UPC code">
+            <button onclick="searchProduct()">Search</button>
             <p>Or</p>
-            <button onclick="scanBarcode()">Click to open camera</button>
-            <button onclick="showScreen('feedback-screen')">Feedback</button>
+            <button onclick="scanBarcode()">Scan Barcode</button>
             <button onclick="showLibrary()">View Library</button>
+            <button onclick="showScreen('feedback-screen')">Feedback</button>
         </section>
 
         <!-- Tutorial Screen -->
@@ -49,10 +49,8 @@
             <p>More questions? Reach out to us: Support@GreenApp.com</p>
             <button onclick="showScreen('welcome-screen')">Back</button>
         </section>
-        
-        
 
-        <!-- Product Detail Screen Template -->
+        <!-- Product Detail Screen -->
         <section id="product-detail-template" style="display: none;">
             <div class="product-header">
                 <div class="product-image-placeholder">
@@ -70,7 +68,7 @@
                 <h3>Environment:</h3>
                 <p id="product-environment"></p>
             </div>
-            <button id="add-to-favorites-btn" onclick="addToFavorites('product_id')">Add to Favorites</button>
+            <button id="add-to-favorites-btn" onclick="addToFavorites()">Add to Favorites</button>
             <div id="favorite-checkmark" class="checkmark" style="display: none;">✔ Added to Favorites</div>
             <button onclick="showScreen('comparison-screen')">Compare</button>
             <button onclick="showScreen('home-screen')">Back</button>
@@ -89,7 +87,6 @@
             </div>
             <button onclick="goBack()">Back</button>
         </section>
-
 
         <!-- Library Screen -->
         <section id="library-screen" style="display: none;">
@@ -126,7 +123,7 @@
 
         <!-- Feedback Screen -->
         <section id="feedback-screen" style="display: none;">
-            <h2>Submit Your Feedback</h2>
+            <h2>Submit Feedback</h2>
             <input type="text" id="user-name" placeholder="Your Name" required>
             <textarea id="feedback-text" placeholder="Enter your feedback here..." rows="4" required></textarea>
             <button onclick="submitFeedback()">Submit</button>

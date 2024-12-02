@@ -1,6 +1,7 @@
 // Load product data from JSON and store it in productsData
 let productsData = [];
 
+// Fetch product data from JSON file
 fetch("data/productData.json")
     .then(response => response.json())
     .then(data => {
@@ -15,8 +16,8 @@ function showProductDetail(productId) {
     if (product) {
         document.getElementById("product-name").innerText = product.name;
         document.getElementById("product-type").innerText = `Type: ${product.type}`;
-        document.getElementById("product-practices").innerText = product.practices;
-        document.getElementById("product-environment").innerText = product.environment;
+        document.getElementById("product-practices").innerText = product.practices || "Not available";
+        document.getElementById("product-environment").innerText = product.environment || "Not available";
 
         const productImage = document.getElementById("product-image");
         productImage.src = product.image;
@@ -26,8 +27,11 @@ function showProductDetail(productId) {
             productImage.alt = "Image not available";
         };
 
+        document.getElementById("add-to-favorites-btn").setAttribute("data-product-id", productId);
+
         showScreen("product-detail-template");
     } else {
+        alert("Product not found.");
         console.error(`Product with ID "${productId}" not found.`);
     }
 }
@@ -59,7 +63,7 @@ function showLibrary() {
         const product = productsData.find(p => p.id === productId);
         if (product) {
             const productCard = `
-                <div class="product">
+                <div class="product" onclick="showProductDetail('${product.id}')">
                     <img src="${product.image}" alt="${product.name}" style="width: 80px; height: 80px;">
                     <h3>${product.name}</h3>
                     <p>${product.type}</p>
@@ -87,7 +91,7 @@ function filterLibrary() {
     } else {
         filteredProducts.forEach(product => {
             const productCard = `
-                <div class="product">
+                <div class="product" onclick="showProductDetail('${product.id}')">
                     <img src="${product.image}" alt="${product.name}" style="width: 80px; height: 80px;">
                     <h3>${product.name}</h3>
                     <p>${product.type}</p>
@@ -97,8 +101,17 @@ function filterLibrary() {
     }
 }
 
-// Function to handle adding a product to favorites with feedback
-function addToFavorites(productId) {
+// Function to handle adding a product to favorites
+function addToFavorites() {
+    const productId = document
+        .getElementById("add-to-favorites-btn")
+        .getAttribute("data-product-id");
+
+    if (!productId) {
+        alert("No product selected.");
+        return;
+    }
+
     let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
     if (!favorites.includes(productId)) {
         favorites.push(productId);
@@ -107,26 +120,26 @@ function addToFavorites(productId) {
 
     const checkmark = document.getElementById("favorite-checkmark");
     checkmark.style.display = "block";
-    checkmark.classList.add("show");
 
     setTimeout(() => {
-        checkmark.classList.remove("show");
         checkmark.style.display = "none";
     }, 2000);
+
+    alert("Product added to favorites.");
 }
 
 // Function to display sustainability information
 function showSustainabilityInfo(productId) {
     const product = productsData.find(p => p.id === productId);
     if (product && product.attributes) {
-        // Populate sustainability information
-        document.getElementById("carbon-footprint").innerText = `Carbon Footprint: ${product.attributes.carbon_footprint || "N/A"}`;
-        document.getElementById("materials").innerText = `Materials: ${product.attributes.materials || "N/A"}`;
-        document.getElementById("certifications").innerText = `Certifications: ${product.attributes.certifications ? product.attributes.certifications.join(", ") : "N/A"}`;
+        document.getElementById("carbon-footprint").innerText = product.attributes.carbon_footprint || "N/A";
+        document.getElementById("materials").innerText = product.attributes.materials || "N/A";
+        document.getElementById("certifications").innerText = product.attributes.certifications
+            ? product.attributes.certifications.join(", ")
+            : "N/A";
 
-        // Add link to sustainability goals
         const linkContainer = document.getElementById("sustainability-info-link");
-        linkContainer.innerHTML = ""; // Clear previous links if any
+        linkContainer.innerHTML = "";
         if (product.attributes.link) {
             const linkElement = document.createElement("a");
             linkElement.href = product.attributes.link;
@@ -134,12 +147,12 @@ function showSustainabilityInfo(productId) {
             linkElement.innerText = "Learn more about sustainability here";
             linkContainer.appendChild(linkElement);
         }
+
+        showScreen("sustainability-info");
     } else {
         alert("Sustainability information is missing for this product.");
     }
-    showScreen("sustainability-info");
 }
-
 
 // Function to scan barcode with camera permission
 let videoStream = null;
@@ -155,7 +168,7 @@ function scanBarcode() {
             showScreen("barcode-scan-screen");
             startBarcodeScan(videoElement);
         })
-        .catch((error) => {
+        .catch(error => {
             console.error("Error accessing the camera:", error);
             alert("Unable to access the camera. Please allow camera permissions.");
         });
@@ -204,47 +217,40 @@ function submitFeedback() {
     }
 
     const feedbackData = { name, feedback: feedbackText };
-    let storedFeedback = JSON.parse(localStorage.getItem("feedback")) || [];
+    const storedFeedback = JSON.parse(localStorage.getItem("feedback")) || [];
     storedFeedback.push(feedbackData);
     localStorage.setItem("feedback", JSON.stringify(storedFeedback));
 
     const checkmark = document.getElementById("checkmark");
-    checkmark.style.display = "inline-block";
-    checkmark.classList.add("show");
+    checkmark.style.display = "block";
 
     document.getElementById("user-name").value = "";
     document.getElementById("feedback-text").value = "";
 
     setTimeout(() => {
-        checkmark.classList.remove("show");
         checkmark.style.display = "none";
     }, 2000);
 }
 
-// Show the specified screen
+// Function to show specific screen
 function showScreen(screenId) {
     const sections = document.querySelectorAll("section");
-    sections.forEach(section => section.style.display = "none");
+    sections.forEach(section => (section.style.display = "none"));
 
-    const settingsButton = document.getElementById("settings-button");
-    settingsButton.style.display = screenId === "welcome-screen" ? "none" : "flex";
-
-    const screenToShow = document.getElementById(screenId);
-    if (screenToShow) {
-        screenToShow.style.display = "block";
-    } else {
-        console.error(`Screen with ID "${screenId}" not found.`);
-    }
+    document.getElementById(screenId).style.display = "block";
 }
 
+// Go back to the previous screen
 function goBack() {
-    // Navigate back to the product detail screen
     showScreen("product-detail-template");
 }
-
 
 // Initialize app on page load
 document.addEventListener("DOMContentLoaded", () => {
     showScreen("welcome-screen");
-});
 
+    const favorites = JSON.parse(localStorage.getItem("favorites"));
+    if (!Array.isArray(favorites)) {
+        localStorage.setItem("favorites", JSON.stringify([]));
+    }
+});
